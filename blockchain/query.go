@@ -120,9 +120,9 @@ func (bcr *BlockchainReactor) listTransactions(ctx context.Context, filter struc
 
 	if err != nil {
 		log.Errorf("listTransactions: %v", err)
-		return resWrapper(nil, err)
+		return NewErrorResponse(err)
 	}
-	return resWrapper(transactions)
+	return NewSuccessResponse(transactions)
 }
 
 type annotatedUTXO struct {

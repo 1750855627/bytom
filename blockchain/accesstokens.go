@@ -35,13 +35,12 @@ func (bcr *BlockchainReactor) listAccessTokens(ctx context.Context) Response {
 
 func (bcr *BlockchainReactor) deleteAccessToken(ctx context.Context, x struct {
 	ID    string `json:"id"`
-	Token string `json:"token"`
 }) Response {
 	//TODO Add delete permission verify.
 	if err := bcr.accessTokens.Delete(ctx, x.ID); err != nil {
-		return resWrapper(nil, err)
+		return NewErrorResponse(err)
 	}
-	return resWrapper(nil)
+	return NewSuccessResponse(nil)
 }
 
 func (bcr *BlockchainReactor) checkAccessToken(ctx context.Context, x struct {
